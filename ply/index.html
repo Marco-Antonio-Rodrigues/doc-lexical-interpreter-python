@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>PLY - My Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">My Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Lexical Interpreter</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../BNF/" class="nav-link">BNF</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../fluxo/" class="nav-link">Compilador/Interpretador</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../help/" class="nav-link">Help</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">PLY</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../help/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ply" class="nav-link">PLY</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#elementos-das-expressoes-regulares" class="nav-link">Elementos das Expressões Regulares</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#recursos-comuns-do-ply" class="nav-link">Recursos Comuns do PLY</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#regras-do-ply" class="nav-link">Regras do PLY</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example" class="nav-link">example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="ply">PLY</h1>
+<p>O <strong><a href="https://github.com/dabeaz/ply">PLY (Python Lex-Yacc)</a></strong> usa <strong>expressões regulares</strong> para definir os padrões que o <strong>Lexer</strong> deve reconhecer. As expressões regulares seguem o padrão da biblioteca <code>re</code> do Python.</p>
+<hr />
+<h2 id="elementos-das-expressoes-regulares">Elementos das Expressões Regulares</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Descrição</strong></th>
+<th><strong>Exemplo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Caractere Literal</strong></td>
+<td>Reconhece um caractere literal específico.</td>
+<td><code>a</code> reconhece apenas <code>a</code>.</td>
+</tr>
+<tr>
+<td><strong>Conjuntos</strong></td>
+<td>Usa colchetes <code>[]</code> para corresponder a um conjunto de caracteres.</td>
+<td><code>[a-z]</code> corresponde a letras minúsculas de <code>a</code> a <code>z</code>.</td>
+</tr>
+<tr>
+<td><strong>Quantificadores</strong></td>
+<td>Define quantas vezes um padrão deve aparecer.</td>
+<td><code>a+</code> corresponde a <code>a</code>, <code>aa</code>, etc.</td>
+</tr>
+<tr>
+<td><strong>Alternância</strong></td>
+<td>Usa <code>|</code> para corresponder a uma ou outra alternativa.</td>
+<td><code>a|b</code> corresponde a <code>a</code> ou <code>b</code>.</td>
+</tr>
+<tr>
+<td><strong>Agrupamento</strong></td>
+<td>Usa parênteses para agrupar partes de uma expressão regular.</td>
+<td><code>(ab)+</code> corresponde a <code>ab</code>, <code>abab</code>, etc.</td>
+</tr>
+<tr>
+<td><strong>Meta-caracteres</strong></td>
+<td>Caracteres especiais que têm significados específicos em expressões regulares.</td>
+<td><code>\d</code> para dígitos, <code>\w</code> para caracteres alfanuméricos.</td>
+</tr>
+<tr>
+<td><strong>Escapando</strong></td>
+<td>Usa <code>\</code> para tratar meta-caracteres como literais.</td>
+<td><code>\+</code> corresponde ao caractere <code>+</code>.</td>
+</tr>
+<tr>
+<td><strong>Âncoras</strong></td>
+<td>Define posições na string, como início ou fim.</td>
+<td><code>^abc$</code> corresponde exatamente a <code>abc</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="recursos-comuns-do-ply">Recursos Comuns do PLY</h2>
+<h3 id="caractere-literal">Caractere Literal</h3>
+<pre><code class="language-python">t_PLUS = r'\+'
+</code></pre>
+<ul>
+<li>Corresponde apenas ao caractere <code>+</code>.</li>
+</ul>
+<h3 id="grupos">Grupos</h3>
+<pre><code class="language-python">t_IF_OR_ELSE = r'if|else'
+</code></pre>
+<ul>
+<li>Corresponde à palavra <code>if</code> ou <code>else</code>.</li>
+</ul>
+<h3 id="quantificadores">Quantificadores</h3>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>Zero ou mais vezes.</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>Uma ou mais vezes.</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Zero ou uma vez.</td>
+</tr>
+<tr>
+<td><code>{n}</code></td>
+<td>Exatamente <code>n</code> vezes.</td>
+</tr>
+<tr>
+<td><code>{n,m}</code></td>
+<td>De <code>n</code> até <code>m</code> vezes.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplo:</strong></p>
+<pre><code class="language-python">t_NUMBER = r'\d+(\.\d+)?'
+</code></pre>
+<ul>
+<li>Corresponde a números inteiros (<code>123</code>) ou decimais (<code>123.45</code>).</li>
+</ul>
+<h3 id="conjuntos-de-caracteres">Conjuntos de Caracteres</h3>
+<pre><code class="language-python">t_LETTER = r'[a-zA-Z]'
+</code></pre>
+<ul>
+<li>Corresponde a qualquer letra maiúscula ou minúscula.</li>
+</ul>
+<pre><code class="language-python">t_DIGIT = r'[0-9]'
+</code></pre>
+<ul>
+<li>Corresponde a qualquer dígito.</li>
+</ul>
+<h3 id="escapando">Escapando</h3>
+<pre><code class="language-python">t_LPAREN = r'\('
+t_RPAREN = r'\)'
+</code></pre>
+<ul>
+<li>Corresponde a <code>(</code> e <code>)</code>.</li>
+</ul>
+<h3 id="ancoras">Âncoras</h3>
+<table>
+<thead>
+<tr>
+<th>Âncora</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^</code></td>
+<td>Início da string.</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>Fim da string.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplo:</strong></p>
+<pre><code class="language-python">r'^[A-Za-z_][A-Za-z0-9_]*$'
+</code></pre>
+<ul>
+<li>Corresponde a identificadores válidos que devem estar sozinhos na entrada.</li>
+</ul>
+<h3 id="meta-caracteres-comuns">Meta-caracteres Comuns</h3>
+<table>
+<thead>
+<tr>
+<th>Meta-caractere</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>Qualquer caractere, exceto nova linha.</td>
+<td><code>a.b</code> → <code>acb</code>, <code>axb</code>.</td>
+</tr>
+<tr>
+<td><code>\d</code></td>
+<td>Dígitos (0-9).</td>
+<td><code>\d+</code> → <code>123</code>, <code>4567</code>.</td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>Letras, números ou <code>_</code>.</td>
+<td><code>\w+</code> → <code>abc123</code>, <code>x_y</code>.</td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>Espaços em branco.</td>
+<td><code>\s+</code> → <code></code>, <code>\t</code>.</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>Limite de palavra.</td>
+<td><code>\bword\b</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="regras-do-ply">Regras do PLY</h2>
+<h3 id="definir-tokens-como-funcoes-ou-variaveis">Definir Tokens como Funções ou Variáveis</h3>
+<ul>
+<li><strong>Funções</strong> são úteis para adicionar comportamento, como conversão de valores:</li>
+</ul>
+<pre><code class="language-python">def t_NUMBER(t):
+    r'\d+(\.\d+)?'
+    t.value = float(t.value)  # Converte o número para float
+    return t
+</code></pre>
+<ul>
+<li><strong>Variáveis</strong> são suficientes para padrões simples:</li>
+</ul>
+<pre><code class="language-python">t_PLUS = r'\+'
+</code></pre>
+<h3 id="ordem-importa">Ordem Importa</h3>
+<ul>
+<li>O Lexer aplica as regras <strong>na ordem em que elas são definidas</strong>.</li>
+<li>Coloque regras mais específicas antes das gerais.</li>
+</ul>
+<h2 id="example">example</h2>
+<pre><code class="language-python">
+import ply.lex as lex
+import ply.yacc as yacc
+
+# === LEXER =================================================
+tokens = (
+    'NUMBER',
+    'PLUS',
+    'MINUS',
+    'TIMES',
+    'DIVIDE',
+    'LPAREN',
+    'RPAREN',
+)
+
+# Regras de expressão regular para tokens simples
+t_PLUS    = r'\+'
+t_MINUS   = r'-'
+t_TIMES   = r'\*'
+t_DIVIDE  = r'/'
+t_LPAREN  = r'\('
+t_RPAREN  = r'\)'
+
+# Ignorar espaços e tabulações
+t_ignore = ' \t'
+
+def t_NUMBER(t):
+    r'\d+(\.\d+)?'
+    t.value = float(t.value)
+    return t
+
+# Regra para rastrear erros léxicos
+def t_error(t):
+    print(f&quot;Caractere inválido: {t.value[0]}&quot;)
+    t.lexer.skip(1)
+
+# Construção do lexer
+lexer = lex.lex()
+
+
+# === PARSER =================================================
+# Precedência dos operadores
+precedence = (
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'TIMES', 'DIVIDE'),
+)
+
+# Regras da gramática
+def p_expression_binop(p):
+    '''expression : expression PLUS expression
+                  | expression MINUS expression
+                  | expression TIMES expression
+                  | expression DIVIDE expression'''
+    if p[2] == '+':
+        p[0] = p[1] + p[3]
+    elif p[2] == '-':
+        p[0] = p[1] - p[3]
+    elif p[2] == '*':
+        p[0] = p[1] * p[3]
+    elif p[2] == '/':
+        p[0] = p[1] / p[3]
+
+def p_expression_group(p):
+    'expression : LPAREN expression RPAREN'
+    p[0] = p[2]
+
+def p_expression_number(p):
+    'expression : NUMBER'
+    p[0] = p[1]
+
+def p_error(p):
+    print(&quot;Erro de sintaxe!&quot;)
+
+# Construção do parser
+parser = yacc.yacc()
+
+# === TESTE =================================================================
+def main():
+    while True:
+        try:
+            s = input(&quot;Digite a expressão: &quot;)
+        except EOFError:
+            break
+        if not s:
+            continue
+        result = parser.parse(s)
+        print(f&quot;Resultado: {result}&quot;)
+
+if __name__ == '__main__':
+    main()
+
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
